@@ -1,0 +1,28 @@
+.part{
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#title{
+    font-family: Microsoft Yahei;
+    font-size: 26px;
+    color: black;
+}
+
+.left{
+	 width: 110px;
+    height: 40px;
+    margin:auto;
+    border-radius: 4px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 微软雅黑;
+    background-color: #47DBE4;
+    border:none;
+    outline: none;
+}
+
+body{
+	text-align: center;
+}

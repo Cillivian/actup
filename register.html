@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta name="viewport" content="width=device-width,user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="css/register.css">
+              <link rel="stylesheet" type="text/css" href="css/home.css">
+        <title>ActUp</title>
+
+    </head>
+
+    <body >
+        <div id="head" style="word-spacing: 25px;">
+     
+    <img onclick="location='select.html'" id="headlogo" style="width:120px;height:32px;" src="images/actup_small.png"/>
+</a>
+<a class="link" href="index.html">登录</a>
+<a class="link" href="register.html">注册</a>
+<a class="link" href="register.html">联系我们</a>
+ </div>
+        <div id="login_frame">
+        <p id="image_logo"><img style="width:250px;height:70px;" src="images/logo.jpg"></p> 
+        <form>
+                <p>
+            <label class="label_input">
+                姓名</label>  <input class="text_field" id="username" type="text" maxlength="25" placeholder="请填写真实姓名" value=""/></p>
+                <p>
+            <label class="label_input">
+                密码</label> <input id="psd" type="password" maxlength="20" placeholder="请设置密码" value="" class="text_field" /></p>
+                <p>
+            <label class="label_input">
+                确认</label> <input class="text_field" id="psdd" type="password" maxlength="20" placeholder="请再次输入密码" value=""/></p>
+                <p>
+            <label class="label_input">
+                性别</label><select class="text_field" id="sex" style="color: rgb(153,153,153); " onchange="choose(this)" value="">
+                    <option value="">请选择</option>
+
+                    <option value="汉纸">汉子</option>
+
+                    <option value="妹子">妹纸</option>
+                </select>
+             </p>
+       <p>
+            <label class="label_input">
+                学校</label>   <input class="text_field" id="school" type="text" maxlength="20" placeholder="请填写学校" value=""/></p>
+             
+
+        <p>
+            <label class="label_input">
+                学院 </label>   <input class="text_field" id="academy" type="text" maxlength="20" placeholder="请填写学院" value=""/></p>
+            
+       
+<p>
+            <label class="label_input">
+                电话</label> <input class="text_field" id="phone" type="text" maxlength="11" placeholder="请填写手机号" value=""/>
+              </p>
+         </form>  
+         <div id="login_control">
+            <div style="margin-bottom: 20px;">
+            <button  id="btn" onclick="submit()">注册</button>
+            <button  id="back" onclick=" location='index.html'">返回</button>
+        </div>
+        </div> <p style="margin:auto;position:relative;bottom:0;display:block;font-size:12px;margin-top:10px;color:grey;">Copyright©2018 ActUp Cillivian</p>
+            <p style="margin:auto;position:relative;bottom:0;display:block;font-size:12px;margin:0px;color:grey;">All rights reserved.</p>
+</div>
+        
+
+           
+
+
+        <script src="jquery-3.1.0.min.js"></script>
+        <script type="text/javascript">
+
+            window.onload=function(){
+                var w=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;
+                var h=window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight;
+                if(w<=414){
+                    document.getElementsByTagName('body')[0].style.width= w+'px';
+                    document.getElementById('foot').style.width=w+'px';
+                    document.getElementById('foot').style.height=w*209/320+'px';
+                }
+
+            }
+
+            function submit(){
+                var username=document.getElementById('username').value;
+                var password=document.getElementById('psd').value;   
+                var psdd=document.getElementById('psdd').value;
+                var sex=document.getElementById('sex').value;
+                var school=document.getElementById('school').value;
+                var academy=document.getElementById('academy').value;
+                var phone=document.getElementById('phone').value;
+                if(username==""){
+                        alert("用户名不能为空哦~");
+                }
+                else if(password==""){
+                    alert("密码不能为空哦~");
+                }
+                else if(psdd==""){
+                    alert("密码不能为空哦~");
+                }
+                else if(password!=psdd){
+                    alert("密码前后不一致~");
+                }
+                else if(sex==""){
+                    alert("性别不能为空哦~");
+                }
+                else if(phone=""){
+                    alert("手机号不能为空哦~");
+                }
+                else{
+                        $.post("register.php",
+                        {
+                            username:username,
+                            password:password,
+                            sex:sex,
+                            school:school,
+                            academy:academy,
+                            phone:phone
+                        },
+                        function(data,status) {
+                            if (status=="success"){        
+                                var condition = data;
+                                // alert(condition);
+                                if(condition==0){
+                                    alert("成功注册~\(≧▽≦)/~");
+                                    window.location.href="index.html";
+                                }
+                                else if(condition==1){
+                                     alert("数据连接失败QUQ");
+                                }
+                                else if(condition==2){
+                                    alert("注册失败，该用户名已被注册QUQ"+condition);
+                                }
+                                else{
+                                    alert(condition);
+                                }
+                            }
+                            else{                
+                                alert("Request was unsuccessful: " + status);                       
+                            }
+                        }
+                    );
+                }
+
+            }
+
+            function choose(t){
+            if(t.value!=""){
+                t.style.color="black";
+            }
+            else{
+                t.style.color="rgb(153,153,153)";
+            }
+        }
+        </script>
+    </body>
+
+</html>
